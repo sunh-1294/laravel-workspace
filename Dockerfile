@@ -39,6 +39,7 @@ RUN apt-get update && apt-get install -y --force-yes \
         php7.2-bcmath \
         php7.2-intl \
         php7.2-dev \
+        php7.2-exif \
         php7.2-gmp \
         libcurl4-openssl-dev \
         libedit-dev \
