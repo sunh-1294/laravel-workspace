@@ -57,6 +57,10 @@ RUN apt-get update && apt-get install -y --force-yes \
         iputils-ping \
         libgmp3-dev
 
+# Install & enable xdebug 
+RUN pecl install xdebug-2.9.2 
+RUN echo "zend_extension=/usr/lib/php/20170718/xdebug.so" >> /etc/php/7.2/cli/php.ini
+
 # remove load xdebug extension (only load on phpunit command)
 RUN sed -i 's/^/;/g' /etc/php/7.2/cli/conf.d/20-xdebug.ini
 
