@@ -81,10 +81,9 @@ RUN apt-get install -y ruby ruby-dev \
 
 # Install Composer, PHPCS and Framgia Coding Standard,
 # PHPMetrics, PHPDepend, PHPMessDetector, PHPCopyPasteDetector
-RUN chmod +x /usr/local/bin/composer*
-
 RUN curl -sfL https://getcomposer.org/download/1.10.21/composer.phar -o /usr/local/bin/composer1
-RUN wget https://getcomposer.org/download/2.0.12/composer.phar -O /usr/local/bin/composer
+RUN curl -sfL https://getcomposer.org/download/2.0.12/composer.phar -o /usr/local/bin/composer
+RUN chmod +x /usr/local/bin/composer*
 RUN composer global require 'squizlabs/php_codesniffer' \
         'phpmetrics/phpmetrics' \
         'pdepend/pdepend' \
