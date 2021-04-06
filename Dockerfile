@@ -81,14 +81,17 @@ RUN apt-get install -y ruby ruby-dev \
 
 # Install Composer, PHPCS and Framgia Coding Standard,
 # PHPMetrics, PHPDepend, PHPMessDetector, PHPCopyPasteDetector
-RUN curl -sfL https://getcomposer.org/download/1.10.21/composer.phar -o /usr/local/bin/composer1
-RUN curl -sfL https://getcomposer.org/download/2.0.12/composer.phar -o /usr/local/bin/composer
-RUN chmod +x /usr/local/bin/composer*
-RUN composer global require 'squizlabs/php_codesniffer' \
+RUN curl -s http://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer \
+    && composer global require 'squizlabs/php_codesniffer' \
         'phpmetrics/phpmetrics' \
         'pdepend/pdepend' \
         'phpmd/phpmd' \
         'sebastian/phpcpd'
+
+# Downgrade to composer version 1
+RUN composer self-update --1
+
 # Create symlink
 RUN ln -s /root/.composer/vendor/bin/phpcs /usr/bin/phpcs \
     && ln -s /root/.composer/vendor/bin/pdepend /usr/bin/pdepend \
