@@ -87,10 +87,7 @@ RUN curl -s http://getcomposer.org/installer | php \
         'phpmetrics/phpmetrics' \
         'pdepend/pdepend' \
         'phpmd/phpmd' \
-        'sebastian/phpcpd' \
-    && cd ~/.composer/vendor/squizlabs/php_codesniffer/src/Standards \
-    && git clone https://github.com/wataridori/framgia-php-codesniffer.git Framgia
-
+        'sebastian/phpcpd'
 # Create symlink
 RUN ln -s /root/.composer/vendor/bin/phpcs /usr/bin/phpcs \
     && ln -s /root/.composer/vendor/bin/pdepend /usr/bin/pdepend \
