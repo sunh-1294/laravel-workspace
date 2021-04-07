@@ -57,6 +57,16 @@ RUN apt-get update && apt-get install -y --force-yes \
         iputils-ping \
         libgmp3-dev
 
+# Install & enable xdebug
+RUN yes | pecl install xdebug \
+    && echo "zend_extension=$(find /usr/lib/php/20170718/ -name xdebug.so)" >> /etc/php/7.2/cli/php.ini \
+    && echo "xdebug.remote_enable=1" >> /etc/php/7.2/cli/conf.d/xdebug.ini \
+    && echo "xdebug.remote_autostart=0" >> /etc/php/7.2/cli/conf.d/xdebug.ini \
+    && echo "xdebug.coverage_enable=1" >> /etc/php/7.2/cli/conf.d/xdebug.ini \
+    && echo "xdebug.default_enable=1" >> /etc/php/7.2/cli/conf.d/xdebug.ini \
+    && echo "xdebug.remote_host='host.docker.internal'" >> /etc/php/7.2/cli/conf.d/xdebug.ini \
+    && echo "xdebug.mode=coverage" >> /etc/php/7.2/cli/php.ini
+
 # remove load xdebug extension (only load on phpunit command)
 RUN sed -i 's/^/;/g' /etc/php/7.2/cli/conf.d/20-xdebug.ini
 
